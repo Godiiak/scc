@@ -8,10 +8,15 @@ Backend
 - Java 11
 - PostgreSQL 12
 - Spring Boot 2.3.2
+- Maven
 
 Frontend
 - React.js
 - Bootstrap 4.5.2
+
+## Interface example
+
+![Главная страница](https://github.com/Godiiak/scc/blob/master/converter.png?raw=true "Основная форма")
 
 ## Author
 

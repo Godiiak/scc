@@ -17,7 +17,6 @@ public class CurrencyController {
     @PostMapping("/convert_currency")
     @ResponseBody
     public String convertCurrencies(@RequestBody Request request){
-        System.out.println("Получили запрос: " + request);
         return currencyService.convertCurrency(request.getFromCurrencyId(), request.getToCurrencyId(), request.getAmount());
     }
 
