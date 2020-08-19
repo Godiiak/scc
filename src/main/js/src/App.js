@@ -12,11 +12,21 @@ export default function App() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [currencies, setCurrencies] = useState([]);
 
-    const [inputValue, setInputValue] = useState('');
+    const [inputValue, setInputValue] = useState('100');
     const [fromCurrency, setFromCurrency] = useState(initValFormCurrency);
     const [toCurrency, setToCurrency] = useState(initValToCurrency);
 
     const [result, setResult] = useState('');
+
+    const [statusButton, setStatusButton] = useState('')
+
+    const handleValidation = (e) => {
+        if(!e.match(/^[0-9]*[.,]?[0-9]+$/)){
+            setStatusButton("disabled")
+        }else {
+            setStatusButton("")
+        }
+    }
 
     const calculateRate = () => {
             const requestOptions = {
@@ -38,6 +48,7 @@ export default function App() {
     }
 
     const handleInputValueChange = (e) => {
+        handleValidation(e.target.value)
         setInputValue(e.target.value)
     }
 
@@ -78,7 +89,7 @@ export default function App() {
                 </div>
                 <div className="row">
                     <div className="col-sm">
-                        <input type="text" className="form-control" id="inputValueToConvert" placeholder="Enter amount" value={inputValue} onChange={handleInputValueChange}/>
+                        <input type="text" className="form-control" id="inputValueToConvert"  value={inputValue} onChange={handleInputValueChange}/>
                     </div>
                     <div className="col-sm">
                         <input className="form-control" type="text" placeholder={result} readOnly/>
@@ -86,7 +97,7 @@ export default function App() {
                 </div>
                 <div className="row">
                     <div className="col-sm mt-3">
-                        <button type="submit" className="btn btn-primary" onClick={calculateRate}>Convert</button>
+                        <button type="submit" className="btn btn-primary" onClick={calculateRate} disabled={statusButton}>Convert</button>
                     </div>
                 </div>
             </div>
