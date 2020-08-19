@@ -4,8 +4,8 @@ import React, {useEffect, useState} from 'react';
 import CurrencyList from "./Converter/CurrencyList";
 
 export default function App() {
-    const initValFormCurrency = "R01035";
-    const initValToCurrency = "R01020A";
+    const initValFormCurrency = "R01235";
+    const initValToCurrency = "R01215";
     const endPointUrl = "http://localhost:8080";
 
     const [error, setError] = useState(null);
@@ -22,9 +22,9 @@ export default function App() {
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id1: fromCurrency, id2: toCurrency, amount: inputValue })
+                body: JSON.stringify({ fromCurrencyId: fromCurrency, toCurrencyId: toCurrency, amount: inputValue })
             };
-            return fetch(endPointUrl + '/calculate_rate', requestOptions)
+            return fetch(endPointUrl + '/convert_currency', requestOptions)
                 .then(response => response.json())
                 .then(data => setResult(data));
     }

@@ -11,6 +11,7 @@ Backend
 
 Frontend
 - React.js
+- Bootstrap 4.5.2
 
 ## Author
 
