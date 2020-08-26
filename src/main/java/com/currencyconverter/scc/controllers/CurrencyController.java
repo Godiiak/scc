@@ -1,7 +1,7 @@
 package com.currencyconverter.scc.controllers;
 
-import com.currencyconverter.scc.entities.Currency;
-import com.currencyconverter.scc.entities.Request;
+import com.currencyconverter.scc.entities.converter.Currency;
+import com.currencyconverter.scc.entities.converter.Request;
 import com.currencyconverter.scc.servicies.CurrencyService;
 import org.springframework.web.bind.annotation.*;
 

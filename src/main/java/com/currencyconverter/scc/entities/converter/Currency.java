@@ -1,4 +1,4 @@
-package com.currencyconverter.scc.entities;
+package com.currencyconverter.scc.entities.converter;
 
 import javax.persistence.*;
 import java.util.ArrayList;

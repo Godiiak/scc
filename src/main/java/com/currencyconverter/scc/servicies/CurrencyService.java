@@ -1,9 +1,9 @@
 package com.currencyconverter.scc.servicies;
 
 import com.currencyconverter.scc.configurations.ServerConfig;
-import com.currencyconverter.scc.entities.Currency;
-import com.currencyconverter.scc.entities.CurrencyXMLHandler;
-import com.currencyconverter.scc.entities.Rate;
+import com.currencyconverter.scc.entities.converter.Currency;
+import com.currencyconverter.scc.entities.converter.CurrencyXMLHandler;
+import com.currencyconverter.scc.entities.converter.Rate;
 import com.currencyconverter.scc.repositories.CurrencyRepository;
 import com.currencyconverter.scc.repositories.RateRepository;
 import org.aeonbits.owner.ConfigFactory;
@@ -23,7 +23,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 @Service
 public class CurrencyService {
