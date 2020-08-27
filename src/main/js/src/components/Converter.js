@@ -1,9 +1,7 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
 import React, {useEffect, useState} from 'react';
-import CurrencyList from "./Converter/CurrencyList";
+import CurrencyList from "./CurrencyList";
 
-export default function App() {
+export default function Converter() {
     const initValFormCurrency = "R01235";
     const initValToCurrency = "R01215";
     const endPointUrl = "http://localhost:8080";
@@ -29,14 +27,14 @@ export default function App() {
     }
 
     const calculateRate = () => {
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ fromCurrencyId: fromCurrency, toCurrencyId: toCurrency, amount: inputValue })
-            };
-            return fetch(endPointUrl + '/convert_currency', requestOptions)
-                .then(response => response.json())
-                .then(data => setResult(data));
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ fromCurrencyId: fromCurrency, toCurrencyId: toCurrency, amount: inputValue })
+        };
+        return fetch(endPointUrl + '/convert_currency', requestOptions)
+            .then(response => response.json())
+            .then(data => setResult(data));
     }
 
     const updateSelectedFromCurrency = (e) => {
@@ -74,11 +72,6 @@ export default function App() {
     } else {
         return (
             <div className="container">
-                <div className="row">
-                    <div className="col-sm mt-4 mb-4">
-                        <h3>Simple Currency Converter</h3>
-                    </div>
-                </div>
                 <div className="row">
                     <div className="col-sm">
                         <CurrencyList currencies={currencies} title="Convert from:" id={"fromCurrencySelect"} initValue={initValFormCurrency} updateSelectedCurrency={updateSelectedFromCurrency}/>
