@@ -1,106 +1,106 @@
+import React, {useEffect, useState} from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import React, {useEffect, useState} from 'react';
-import CurrencyList from "./Converter/CurrencyList";
+import "./App.css";
 
-export default function App() {
-    const initValFormCurrency = "R01235";
-    const initValToCurrency = "R01215";
-    const endPointUrl = "http://localhost:8080";
+import AuthService from "./services/AuthService";
 
-    const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [currencies, setCurrencies] = useState([]);
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Profile from "./components/Profile";
+import BoardUser from "./components/BoardUser";
+import BoardAdmin from "./components/BoardAdmin";
+import Converter from "./components/Converter";
 
-    const [inputValue, setInputValue] = useState('100');
-    const [fromCurrency, setFromCurrency] = useState(initValFormCurrency);
-    const [toCurrency, setToCurrency] = useState(initValToCurrency);
+export default function App(){
+  const [showAdminBoard, setShowAdminBoard] = useState(false);
+  const [currentUser, setCurrentUser] = useState(undefined);
 
-    const [result, setResult] = useState('');
+  const logOut = () => {
+    AuthService.logout();
+  }
 
-    const [statusButton, setStatusButton] = useState('')
-
-    const handleValidation = (e) => {
-        if(!e.match(/^[0-9]*[.,]?[0-9]+$/)){
-            setStatusButton("disabled")
-        }else {
-            setStatusButton("")
-        }
+  useEffect(() => {
+    const user = AuthService.getCurrentUser();
+    if (user){
+      setCurrentUser(user);
+      setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
     }
+  }, [])
 
-    const calculateRate = () => {
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ fromCurrencyId: fromCurrency, toCurrencyId: toCurrency, amount: inputValue })
-            };
-            return fetch(endPointUrl + '/convert_currency', requestOptions)
-                .then(response => response.json())
-                .then(data => setResult(data));
-    }
+  return (
+      <Router>
+        <div>
+          <nav className="navbar navbar-expand navbar-dark bg-dark">
+            <Link to={"/"} className="navbar-brand">
+              SCC
+            </Link>
+            <div className="navbar-nav mr-auto">
+              <li className="nav-item">
+                <Link to={"/converter"} className="nav-link">
+                  Converter
+                </Link>
+              </li>
 
-    const updateSelectedFromCurrency = (e) => {
-        setFromCurrency(e);
-    }
+              {showAdminBoard && (
+                  <li className="nav-item">
+                    <Link to={"/admin"} className="nav-link">
+                      Admin Board
+                    </Link>
+                  </li>
+              )}
 
-    const updateSelectedToCurrency = (e) => {
-        setToCurrency(e);
-    }
-
-    const handleInputValueChange = (e) => {
-        handleValidation(e.target.value)
-        setInputValue(e.target.value)
-    }
-
-    useEffect(() => {
-        fetch(endPointUrl + "/get_currencies_list")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setIsLoaded(true);
-                    setCurrencies(result);
-                },
-                (error) => {
-                    setIsLoaded(true);
-                    setError(error);
-                }
-            )
-    }, [])
-
-    if (error) {
-        return <div>Error: {error.message}</div>;
-    } else if (!isLoaded) {
-        return <div>Loading...</div>;
-    } else {
-        return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-sm mt-4 mb-4">
-                        <h3>Simple Currency Converter</h3>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-sm">
-                        <CurrencyList currencies={currencies} title="Convert from:" id={"fromCurrencySelect"} initValue={initValFormCurrency} updateSelectedCurrency={updateSelectedFromCurrency}/>
-                    </div>
-                    <div className="col-sm">
-                        <CurrencyList currencies={currencies} title="Convert to:" id={"toCurrencySelect"} initValue={initValToCurrency} updateSelectedCurrency={updateSelectedToCurrency}/>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-sm">
-                        <input type="text" className="form-control" id="inputValueToConvert"  value={inputValue} onChange={handleInputValueChange}/>
-                    </div>
-                    <div className="col-sm">
-                        <input className="form-control" type="text" placeholder={result} readOnly/>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-sm mt-3">
-                        <button type="submit" className="btn btn-primary" onClick={calculateRate} disabled={statusButton}>Convert</button>
-                    </div>
-                </div>
+              {currentUser && (
+                  <li className="nav-item">
+                    <Link to={"/user"} className="nav-link">
+                      User
+                    </Link>
+                  </li>
+              )}
             </div>
-        );
-    }
+
+            {currentUser ? (
+                <div className="navbar-nav ml-auto">
+                  <li className="nav-item">
+                    <Link to={"/profile"} className="nav-link">
+                      {currentUser.username}
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <a href="/logout" className="nav-link" onClick={logOut}>
+                      Logout
+                    </a>
+                  </li>
+                </div>
+            ) : (
+                <div className="navbar-nav ml-auto">
+                  <li className="nav-item">
+                    <Link to={"/login"} className="nav-link">
+                      Login
+                    </Link>
+                  </li>
+
+                  <li className="nav-item">
+                    <Link to={"/register"} className="nav-link">
+                      Sign Up
+                    </Link>
+                  </li>
+                </div>
+            )}
+          </nav>
+
+          <div className="container mt-3">
+            <Switch>
+              <Route exact path={["/", "/converter"]} component={Converter} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/profile" component={Profile} />
+              <Route path="/user" component={BoardUser} />
+              <Route path="/admin" component={BoardAdmin} />
+            </Switch>
+          </div>
+        </div>
+      </Router>
+  );
 }
