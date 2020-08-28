@@ -6,12 +6,13 @@ import "./App.css";
 
 import AuthService from "./services/AuthService";
 
-import Login from "./components/Login";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
 import BoardUser from "./components/BoardUser";
 import BoardAdmin from "./components/BoardAdmin";
 import Converter from "./components/Converter";
+import Login from "./components/Login";
+
 
 export default function App(){
   const [showAdminBoard, setShowAdminBoard] = useState(false);

@@ -12,11 +12,25 @@ Backend
 
 Frontend
 - React.js
+- React-router-dom 5.2.0
+- React-validation 3.0.7
+- Axios 0.20.0
+- Validator 13.1.1
 - Bootstrap 4.5.2
 
 ## Interface example
+Login page with validation:
 
-![Главная страница](https://github.com/Godiiak/scc/blob/master/converter.png?raw=true "Основная форма")
+![Главная страница](https://github.com/Godiiak/scc/blob/master/loginForm.png?raw=true "Login page")
+
+Registration page with validation:
+
+![Главная страница](https://github.com/Godiiak/scc/blob/master/signupForm.png?raw=true "Sign up page")
+
+Currency converter page:
+
+![Главная страница](https://github.com/Godiiak/scc/blob/master/converter.png?raw=true "Converter")
+
 
 ## Author
 
