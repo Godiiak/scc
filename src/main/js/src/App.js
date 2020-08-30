@@ -8,7 +8,7 @@ import AuthService from "./services/AuthService";
 
 import Register from "./components/Register";
 import Profile from "./components/Profile";
-import BoardUser from "./components/BoardUser";
+import History from "./components/History";
 import BoardAdmin from "./components/BoardAdmin";
 import Converter from "./components/Converter";
 import Login from "./components/Login";
@@ -54,8 +54,8 @@ export default function App(){
 
               {currentUser && (
                   <li className="nav-item">
-                    <Link to={"/user"} className="nav-link">
-                      User
+                    <Link to={"/history"} className="nav-link">
+                      History
                     </Link>
                   </li>
               )}
@@ -97,7 +97,7 @@ export default function App(){
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/profile" component={Profile} />
-              <Route path="/user" component={BoardUser} />
+              <Route path="/history" component={History} />
               <Route path="/admin" component={BoardAdmin} />
             </Switch>
           </div>

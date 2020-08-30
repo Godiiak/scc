@@ -51,7 +51,7 @@ export default function Converter() {
     }
 
     useEffect(() => {
-        fetch(endPointUrl + "/get_currencies_list")
+        fetch(endPointUrl + "/get_currencies_list")//TODO: remove request to axios service
             .then(res => res.json())
             .then(
                 (result) => {
@@ -74,23 +74,43 @@ export default function Converter() {
             <div className="container">
                 <div className="row">
                     <div className="col-sm">
-                        <CurrencyList currencies={currencies} title="Convert from:" id={"fromCurrencySelect"} initValue={initValFormCurrency} updateSelectedCurrency={updateSelectedFromCurrency}/>
+                        <CurrencyList currencies={currencies}
+                                      title="Convert from:"
+                                      id={"fromCurrencySelect"}
+                                      initValue={initValFormCurrency}
+                                      updateSelectedCurrency={updateSelectedFromCurrency}/>
                     </div>
                     <div className="col-sm">
-                        <CurrencyList currencies={currencies} title="Convert to:" id={"toCurrencySelect"} initValue={initValToCurrency} updateSelectedCurrency={updateSelectedToCurrency}/>
+                        <CurrencyList currencies={currencies}
+                                      title="Convert to:"
+                                      id={"toCurrencySelect"}
+                                      initValue={initValToCurrency}
+                                      updateSelectedCurrency={updateSelectedToCurrency}/>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-sm">
-                        <input type="text" className="form-control" id="inputValueToConvert"  value={inputValue} onChange={handleInputValueChange}/>
+                        <input type="text"
+                               className="form-control"
+                               id="inputValueToConvert"
+                               value={inputValue}
+                               onChange={handleInputValueChange}/>
                     </div>
                     <div className="col-sm">
-                        <input className="form-control" type="text" placeholder={result} readOnly/>
+                        <input className="form-control"
+                               type="text"
+                               placeholder={result}
+                               readOnly/>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-sm mt-3">
-                        <button type="submit" className="btn btn-primary" onClick={calculateRate} disabled={statusButton}>Convert</button>
+                        <button type="submit"
+                                className="btn btn-primary"
+                                onClick={calculateRate}
+                                disabled={statusButton}>
+                            Convert
+                        </button>
                     </div>
                 </div>
             </div>

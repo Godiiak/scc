@@ -8,7 +8,9 @@ export default function CurrencyList(props){
     return(
         <form>
             <div className="form-group">
-                <label htmlFor="formControlCurrencySelect">{props.title}</label>
+                <label htmlFor="formControlCurrencySelect">
+                    <h5>{props.title}</h5>
+                </label>
                 <select className="form-control" id={props.id}
                         onChange={e => setSelectCurrency(e.target.value && props.updateSelectedCurrency(e.target.value))}
                         value={selectCurrency}>
