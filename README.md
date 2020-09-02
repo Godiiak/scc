@@ -31,6 +31,9 @@ Currency converter page:
 
 ![Главная страница](https://github.com/Godiiak/scc/blob/master/converter.png?raw=true "Converter")
 
+History conversation for authorized user:
+
+![Главная страница](https://github.com/Godiiak/scc/blob/master/history.png?raw=true "History")
 
 ## Author
 

@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import CurrencyList from "./CurrencyList";
+import ConverterService from "../services/ConverterService";
 
 export default function Converter() {
     const initValFormCurrency = "R01235";
@@ -27,14 +28,11 @@ export default function Converter() {
     }
 
     const calculateRate = () => {
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ fromCurrencyId: fromCurrency, toCurrencyId: toCurrency, amount: inputValue })
-        };
-        return fetch(endPointUrl + '/convert_currency', requestOptions)
-            .then(response => response.json())
-            .then(data => setResult(data));
+        ConverterService.conversionCurrencies(JSON.stringify({
+            fromCurrencyId: fromCurrency,
+            toCurrencyId: toCurrency,
+            amount: inputValue
+        })).then(r => setResult(r.data));
     }
 
     const updateSelectedFromCurrency = (e) => {

@@ -23,6 +23,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 @Service
 public class CurrencyService {
@@ -72,5 +73,9 @@ public class CurrencyService {
 
     public Iterable<Currency> getCurrenciesList(){
         return currencyRepository.findAll();
+    }
+
+    public String getCurrencyById(String id){
+        return currencyRepository.findById(id).get().getName();
     }
 }
