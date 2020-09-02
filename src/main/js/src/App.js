@@ -7,7 +7,6 @@ import "./App.css";
 import AuthService from "./services/AuthService";
 
 import Register from "./components/Register";
-import Profile from "./components/Profile";
 import History from "./components/History";
 import BoardAdmin from "./components/BoardAdmin";
 import Converter from "./components/Converter";
@@ -64,7 +63,7 @@ export default function App(){
             {currentUser ? (
                 <div className="navbar-nav ml-auto">
                   <li className="nav-item">
-                    <Link to={"/profile"} className="nav-link">
+                    <Link to={"/"} className="nav-link text-success disabled">
                       {currentUser.username}
                     </Link>
                   </li>
@@ -96,7 +95,6 @@ export default function App(){
               <Route exact path={["/", "/converter"]} component={Converter} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
-              <Route exact path="/profile" component={Profile} />
               <Route path="/history" component={History} />
               <Route path="/admin" component={BoardAdmin} />
             </Switch>
